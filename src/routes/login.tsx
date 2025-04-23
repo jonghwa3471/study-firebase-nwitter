@@ -11,8 +11,9 @@ import {
   Title,
   Wrapper,
 } from "../components/auth-components";
+import GithubButton from "../components/github-btn";
 
-export default function CreateAccount() {
+export default function Login() {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [email, setEmail] = useState("");
@@ -70,9 +71,10 @@ export default function CreateAccount() {
       </Form>
       {error !== "" ? <Error>{error}</Error> : null}
       <Switcher>
-        Don't have an account?
+        Don't have an account? &nbsp;
         <Link to="/create-account">Create one &rarr;</Link>
       </Switcher>
+      <GithubButton />
     </Wrapper>
   );
 }
