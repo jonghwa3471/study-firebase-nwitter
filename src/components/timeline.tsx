@@ -1,6 +1,5 @@
 import {
   collection,
-  getDocs,
   limit,
   onSnapshot,
   orderBy,
@@ -50,7 +49,7 @@ export default function Timeline() {
             id: doc.id,
           };
         }); */
-      unsubscribe = await onSnapshot(tweetsQuery, (snapshot) => {
+      unsubscribe = onSnapshot(tweetsQuery, (snapshot) => {
         const tweets = snapshot.docs.map((doc) => {
           const { tweet, createdAt, userId, username, photo } = doc.data();
           return {
