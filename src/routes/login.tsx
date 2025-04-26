@@ -44,8 +44,6 @@ export default function Login() {
     } finally {
       setIsLoading(false);
     }
-
-    console.log(name, email, password);
   };
   return (
     <Wrapper>
