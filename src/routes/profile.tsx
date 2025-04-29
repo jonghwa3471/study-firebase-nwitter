@@ -73,30 +73,31 @@ export default function Profile() {
       });
     }
   };
-  const fetchTweets = async () => {
-    const tweetsQuery = query(
-      collection(db, "tweets"),
-      where("userId", "==", user?.uid),
-      orderBy("createdAt", "desc"),
-      limit(25)
-    );
-    const snapshot = await getDocs(tweetsQuery);
-    const tweets = snapshot.docs.map((doc) => {
-      const { tweet, createdAt, userId, username, photo } = doc.data();
-      return {
-        tweet,
-        createdAt,
-        userId,
-        username,
-        photo,
-        id: doc.id,
-      };
-    });
-    setTweets(tweets);
-  };
+
   useEffect(() => {
+    const fetchTweets = async () => {
+      const tweetsQuery = query(
+        collection(db, "tweets"),
+        where("userId", "==", user?.uid),
+        orderBy("createdAt", "desc"),
+        limit(25)
+      );
+      const snapshot = await getDocs(tweetsQuery);
+      const tweets = snapshot.docs.map((doc) => {
+        const { tweet, createdAt, userId, username, photo } = doc.data();
+        return {
+          tweet,
+          createdAt,
+          userId,
+          username,
+          photo,
+          id: doc.id,
+        };
+      });
+      setTweets(tweets);
+    };
     fetchTweets();
-  }, []);
+  }, [user?.uid]);
   return (
     <Wrapper>
       <AvatarUpload htmlFor="avatar">
